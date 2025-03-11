@@ -3,13 +3,14 @@ from services.DbService import DbService
 from services.DbAppointment import DbAppointment
 from module.Appointment import Appointment
 from module.Employe import Employe
+from module.Service import Service
 from datetime import datetime
 
 class ServiceScreen:
     def __init__(self, service):
         userId =input("employe Id:")
         user = DbUser().getItemWithID(userId)
-        service = DbService().getItemWithID(user[13])
+        service1 = DbService().getItemWithID(user[13])
         if user != None:
             now = datetime.now()
             if now.hour >= 8 and now.hour <= 12:
@@ -19,7 +20,8 @@ class ServiceScreen:
                     print("update")
                 else:
                     formatted_time = now.strftime("%H:%M:%S")
-                    appointment = Appointment(id=None, checkOut=None, checkIn=formatted_time, date= now.date, service=service, employe=Employe(*user,service=service))
+                    appointment = Appointment(id=None, checkOut=None, checkIn=formatted_time, date= now.date, 
+                                              service=Service(*service, empoloyee=None), employe=Employe(*user,service=service1))
                     dbAppointment.insertItem(appointment)
                     print('create')
             elif now.hour >= 13 and now.hour <= 16:

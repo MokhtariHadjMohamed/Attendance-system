@@ -6,13 +6,12 @@ class DbUser:
     def __init__(self):
         self.conn = Connection().getConnection()
         
-    def getAllItem ():
+    def getAllItem (self):
         sql = f'select * from user;'
         c = self.conn.cursor()
         c.execute(sql)
         ret =  c.fetchall()
-        for row in ret:
-            return row
+        return ret
 
     def getItemWithID(self, user_id):
         sql = f'select * from user where id = {user_id};'
@@ -23,12 +22,12 @@ class DbUser:
             return row
         
     def insertItem(self, employe:Employe):
-        sql = f'''insert into user (name,state,username,passeword,adresse,nmrTelephone,prenom,timein,timeout
-                ,timeout,typeUser,image,fingerPrinte, service) 
+        sql = f'''insert into user (name,state,username,password,nmr_telephone,prenom,timein
+                ,timeout,typeUser,image,fingerPrinte, id_service) 
         values ("{employe.name}", "{employe.state}", "{employe.username}", "{employe.passeword}",
-        "{employe.adresse}", "{employe.nmrTelephone}", "{employe.prenom}", "{employe.timein}"
+         "{employe.nmrTelephone}", "{employe.prenom}", "{employe.timein}"
         , "{employe.timeout}", "{employe.typeUser}", "{employe.image}", "{employe.fingerPrinte}"
-        , "{employe.service}");'''
+        , "{employe.service.id}");'''
         c = self.conn.cursor()
         c.execute(sql)
         self.conn.commit()

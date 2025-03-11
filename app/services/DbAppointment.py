@@ -23,9 +23,9 @@ class DbAppointment:
             return row
         
     def insertItem(self, appointment:Appointment):
-        sql = f'''insert into appointment (id_service,id_user,checkin,chekout,date_appointment) 
-        values ({appointment.service.id}, {appointment.employe.id}, "{appointment.checkin}",
-        "{appointment.checkout}", "{appointment.date}");'''
+        sql = f'''insert into appointment (id_sarvice,id_user,checkin,checkout,date_appointment) 
+        values ({appointment.service.id}, {appointment.employe.id}, "{appointment.checkIn}",
+        "{appointment.checkOut}", "{appointment.date}");'''
         c = self.conn.cursor()
         c.execute(sql)
         self.conn.commit()

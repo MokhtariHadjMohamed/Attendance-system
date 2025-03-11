@@ -7,10 +7,10 @@ user = auth.get_user()
 
 while True:
     if user !=None:
-        if len(user) == 1:
+        if len(user) == 7:
             ServiceScreen(user)
-        elif len(user) > 1:
-            typeuser = user[1]
+        elif len(user) > 7:
+            typeuser = user[10]
             if typeuser == "arh":
                 EmployerScreen()
             elif typeuser =="inf":

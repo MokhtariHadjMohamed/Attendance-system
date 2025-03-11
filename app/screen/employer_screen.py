@@ -1,6 +1,8 @@
 from services.DbAppointment import DbAppointment
+from services.DbService import DbService
 from datetime import datetime
 from module.Employe import Employe
+from module.Service import Service
 from services.DbUser import DbUser
 
 class EmployerScreen :
@@ -9,6 +11,8 @@ class EmployerScreen :
         print("2-show all apsent")
         print("3-add new employer")
         print("4-add new service")
+        print('5-show all service')
+        print('6-show all employer')
         a = input("choose:")
         if a == "1":
             now = datetime.now()
@@ -33,12 +37,29 @@ class EmployerScreen :
             typeUser = input('typeUser:')
             image = input('image:')
             fingerPrinte = input('fingerPrinte:')
-            service = input('service:')
+            service = Service(id=input('service:'),name=None,state=None,username=None,passeword=None,adresse=None,
+                              nmrTelephone=None, empoloyee=None)
             employe = Employe(id=None,name=name,state=state,username=username,passeword=passeword,adresse=adresse,
                               nmrTelephone=nmrTelephone,prenom=prenom,timein=timein,timeout=timein,salaire=salaire
                               ,typeUser=typeUser,image=image,fingerPrinte=fingerPrinte,service=service)
-            DbUser().insertItem(user)
+            DbUser().insertItem(employe)
         elif a =="4":
-            print("4-add new service")
-
+            print("Add new service")
+            name = input('name:')
+            state = input('state:')
+            username = input('username:')
+            passeword = input('password:')
+            adresse = input('adresse:')
+            nmrTelephone = input('nmrTelephone:')
+            service = Service(id=None,name=name,state=state,username=username,passeword=passeword,adresse=adresse,
+                              nmrTelephone=nmrTelephone, empoloyee=None)
+            DbService().insertItem(service)
+        elif a =="5":
+            service=DbService().getAllItem()
+            for row in service:
+                print(row)
+        elif a =="6":
+            users=DbUser().getAllItem()
+            for row in users:
+                print(row)
 
